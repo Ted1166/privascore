@@ -1,0 +1,10 @@
+{
+  "default": "arbitrum-sepolia",
+  "chains": {
+    "arbitrum-sepolia": {
+      "id": "421614",
+      "host": "https://sepolia-rollup.arbitrum.io/rpc",
+      "sms": "https://sms.arbitrum-sepolia-testnet.iex.ec"
+    }
+  }
+}
