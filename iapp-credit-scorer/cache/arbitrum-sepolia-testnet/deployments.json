@@ -1,5 +1,11 @@
 [
   {
+    "image": "grimm658/iapp-credit-scorer:0.0.1-tee-scone-5.9.1-v16-prod-7f51ce466121",
+    "app": "0x60c5AeB72709d5acA3DB68Be57Abc5B0e6DAaefb",
+    "owner": "0x9E2d2c2522a904EF07DC61F88D189833476D4A58",
+    "date": "2026-01-28T23:32:34.651Z"
+  },
+  {
     "image": "grimm658/iapp-credit-scorer:0.0.1-tee-scone-5.9.1-v16-prod-881081f79878",
     "app": "0xf75a2cfC9baF52FeB068619f8f1A9e90cF8CC848",
     "owner": "0x9E2d2c2522a904EF07DC61F88D189833476D4A58",
