@@ -31,10 +31,6 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_IAPP_ADDRESS: process.env.NEXT_PUBLIC_IAPP_ADDRESS,
   },
-  
-  typescript: {
-    ignoreBuildErrors: false,
-  },
 };
 
 export default nextConfig;
