@@ -1,7 +1,3 @@
 {
-  "buildCommand": "next build",
-  "framework": "nextjs",
-  "functions": {
-    "maxDuration": 60
-  }
+  "framework": "nextjs"
 }
