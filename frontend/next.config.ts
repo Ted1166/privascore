@@ -3,9 +3,6 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   
-  turbopack: {
-  },
-  
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -13,15 +10,30 @@ const nextConfig: NextConfig = {
         net: false,
         tls: false,
         crypto: false,
+        stream: false,
+        http: false,
+        https: false,
+        zlib: false,
+        path: false,
+        os: false,
       };
     }
     
-    config.externals = [...config.externals, { bufferutil: "bufferutil", "utf-8-validate": "utf-8-validate" }];
+    config.externals.push({
+      bufferutil: 'bufferutil',
+      'utf-8-validate': 'utf-8-validate',
+      encoding: 'encoding',
+    });
     
     return config;
   },
+  
   env: {
     NEXT_PUBLIC_IAPP_ADDRESS: process.env.NEXT_PUBLIC_IAPP_ADDRESS,
+  },
+  
+  typescript: {
+    ignoreBuildErrors: false,
   },
 };
 
