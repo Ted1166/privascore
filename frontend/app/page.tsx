@@ -75,7 +75,7 @@ export default function Home() {
     if (!provider) return;
     
     try {
-      const taskStatus = await checkTaskStatus(taskId, provider);
+      const taskStatus = await checkTaskStatus(taskId, window.ethereum);
       
       setStatus(`Task status: ${taskStatus.statusName}`);
       console.log('Task status:', taskStatus.statusName);
@@ -87,7 +87,7 @@ export default function Home() {
         }
         
         setStatus('Task completed! Fetching result...');
-        const scoreResult = await checkTaskResult(taskId, provider, setStatus);
+        const scoreResult = await checkTaskResult(taskId, window.ethereum, setStatus);
         setResult(scoreResult);
         setLoading(false);
       } else if (taskStatus.status === 3 || taskStatus.statusName === 'FAILED' || taskStatus.isTimedOut) {
@@ -238,6 +238,15 @@ export default function Home() {
                 </div>
               )}
             </div>
+
+            {taskInfo && loading && (
+              <button
+                onClick={() => pollTaskStatus(taskInfo.taskId)}
+                className="w-full mt-3 bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700"
+              >
+                🔄 Check Task Status Now
+              </button>
+            )}
 
             {/* Result Section */}
             {result && !result.error && (

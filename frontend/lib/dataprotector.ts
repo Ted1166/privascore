@@ -3,6 +3,23 @@ import { IExecDataProtector } from '@iexec/dataprotector';
 const IAPP_ADDRESS = process.env.NEXT_PUBLIC_IAPP_ADDRESS!;
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
+async function retryWithDelay<T>(
+  fn: () => Promise<T>,
+    retries = 3,
+    delay = 5000
+  ): Promise<T> {
+    try {
+      return await fn();
+    } catch (error: any) {
+      if (retries > 0 && (error.message?.includes('gas') || error.message?.includes('baseFee'))) {
+        console.log(`Gas error detected. Retrying in ${delay/1000}s... (${retries} retries left)`);
+        await new Promise(r => setTimeout(r, delay));
+        return retryWithDelay(fn, retries - 1, delay);
+      }
+      throw error;
+    }
+  }
+
 // Get current gas prices from network
 async function getGasPrices(provider: any) {
   try {
@@ -40,14 +57,16 @@ export async function protectAndScore(file: File, walletProvider: any, onStatusU
     console.log('Step 1: Encrypting and uploading file...');
     if (onStatusUpdate) onStatusUpdate('Encrypting and uploading file...');
     
-    const protectedData = await dataProtector.core.protectData({
-      name: `credit-data-${Date.now()}`,
-      data: { file: fileBuffer },
-      onStatusUpdate: ({ title, isDone }) => {
-        console.log(`  ${title}: ${isDone ? '✅' : '⏳'}`);
-        if (onStatusUpdate) onStatusUpdate(`${title}...`);
-      }
-    });
+    const protectedData = await retryWithDelay(() => 
+      dataProtector.core.protectData({
+        name: `credit-data-${Date.now()}`,
+        data: { file: fileBuffer },
+        onStatusUpdate: ({ title, isDone }) => {
+          console.log(`  ${title}: ${isDone ? '✅' : '⏳'}`);
+          if (onStatusUpdate) onStatusUpdate(`${title}...`);
+        }
+      })
+    );
 
     console.log('✅ Protected data created:', protectedData.address);
     if (onStatusUpdate) onStatusUpdate('Protected data created');
@@ -100,8 +119,8 @@ export async function protectAndScore(file: File, walletProvider: any, onStatusU
   } catch (error: any) {
     console.error('❌ Full error:', error);
     
-    if (error.message?.includes('max fee per gas less than block base fee')) {
-      throw new Error('Gas price too low. Network is congested. Please try again in a few minutes.');
+    if (error.message?.includes('max fee per gas') || error.message?.includes('baseFee')) {
+      throw new Error('⚠️ Network congestion detected. Please wait 2-3 minutes and try again, or manually increase gas fee in MetaMask when the transaction appears.');
     }
     
     if (error.code === 4001) {
