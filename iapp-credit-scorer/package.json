@@ -1,0 +1,17 @@
+{
+  "name": "iapp-credit-scorer",
+  "version": "1.0.0",
+  "description": "This project is an iExec Decentralized Confidential Computing serverless application leveraging Trusted Execution Environment (TEE).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "ethers": "^6.16.0",
+    "iexec": "^8.22.5"
+  }
+}

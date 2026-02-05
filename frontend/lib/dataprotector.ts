@@ -3,8 +3,36 @@ import { IExecDataProtector } from '@iexec/dataprotector';
 const IAPP_ADDRESS = process.env.NEXT_PUBLIC_IAPP_ADDRESS!;
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
+// Get current gas prices from network
+async function getGasPrices(provider: any) {
+  try {
+    const feeData = await provider.getFeeData();
+    
+    // Increase by 20% to ensure transaction goes through
+    const maxFeePerGas = feeData.maxFeePerGas 
+      ? (feeData.maxFeePerGas * 120n) / 100n 
+      : 40000000000n; // 40 Gwei fallback
+    
+    const maxPriorityFeePerGas = feeData.maxPriorityFeePerGas 
+      ? (feeData.maxPriorityFeePerGas * 120n) / 100n 
+      : 2000000000n; // 2 Gwei fallback
+    
+    return {
+      maxFeePerGas: maxFeePerGas.toString(),
+      maxPriorityFeePerGas: maxPriorityFeePerGas.toString()
+    };
+  } catch (error) {
+    console.log('Could not fetch gas prices, using safe defaults');
+    return {
+      maxFeePerGas: '40000000000', // 40 Gwei
+      maxPriorityFeePerGas: '2000000000' // 2 Gwei
+    };
+  }
+}
+
 export async function protectAndScore(file: File, walletProvider: any, onStatusUpdate?: (status: string) => void) {
   try {
+    // Initialize data protector
     const dataProtector = new IExecDataProtector(walletProvider);
     
     const fileBuffer = await file.arrayBuffer();
@@ -24,8 +52,8 @@ export async function protectAndScore(file: File, walletProvider: any, onStatusU
     console.log('✅ Protected data created:', protectedData.address);
     if (onStatusUpdate) onStatusUpdate('Protected data created');
 
-    const signer = await walletProvider.getSigner();
-    const userAddress = await signer.getAddress();
+    const accounts = await walletProvider.request({ method: 'eth_requestAccounts' });
+    const userAddress = accounts[0];
 
     console.log('Step 2: Granting access to iApp...');
     if (onStatusUpdate) onStatusUpdate('Granting access to app...');
@@ -48,9 +76,8 @@ export async function protectAndScore(file: File, walletProvider: any, onStatusU
     const result = await dataProtector.core.processProtectedData({
       protectedData: protectedData.address,
       app: IAPP_ADDRESS,
-      maxPrice: 100000000,
-      workerpoolMaxPrice: 100000000,
-      category: 0,
+      maxPrice: 1000000000, // 1 RLC in nRLC
+      workerpoolMaxPrice: 1000000000,
       onStatusUpdate: ({ title, isDone, payload }) => {
         console.log(`  ${title}: ${isDone ? '✅' : '⏳'}`, payload);
         if (onStatusUpdate && payload?.taskId) {
@@ -73,6 +100,10 @@ export async function protectAndScore(file: File, walletProvider: any, onStatusU
   } catch (error: any) {
     console.error('❌ Full error:', error);
     
+    if (error.message?.includes('max fee per gas less than block base fee')) {
+      throw new Error('Gas price too low. Network is congested. Please try again in a few minutes.');
+    }
+    
     if (error.code === 4001) {
       throw new Error('Transaction rejected by user');
     }
@@ -81,8 +112,8 @@ export async function protectAndScore(file: File, walletProvider: any, onStatusU
       throw new Error('Insufficient ETH for gas. Get Arbitrum Sepolia ETH from faucet');
     }
     
-    if (error.message?.includes('Internal JSON-RPC error')) {
-      throw new Error('Transaction failed. Check your ETH balance and try again.');
+    if (error.message?.includes('authorizedApp is a required field')) {
+      throw new Error('App address not configured. Check NEXT_PUBLIC_IAPP_ADDRESS in .env.local');
     }
     
     throw error;

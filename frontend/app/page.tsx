@@ -7,7 +7,7 @@ const ARBITRUM_SEPOLIA_PARAMS = {
   chainId: '0x66eee',
   chainName: 'Arbitrum Sepolia',
   nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
-  rpcUrls: ['https://arbitrum-sepolia.infura.io/v3/50180baf3ab04100ac923441ffc02078'],
+  rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
   blockExplorerUrls: ['https://sepolia.arbiscan.io/']
 };
 
@@ -56,7 +56,7 @@ export default function Home() {
     try {
       const { ethers } = await import('ethers');
       await switchToArbitrumSepolia();
-      const provider = new ethers.BrowserProvider(window.ethereum);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
       await provider.send('eth_requestAccounts', []);
       setProvider(provider);
       setConnected(true);
@@ -119,7 +119,7 @@ export default function Home() {
     try {
       await switchToArbitrumSepolia();
       
-      const taskData = await protectAndScore(file, provider, setStatus);
+      const taskData = await protectAndScore(file, window.ethereum, setStatus);
       setTaskInfo(taskData);
       
       pollIntervalRef.current = setInterval(() => {

@@ -5,13 +5,36 @@
   "requestorder": {},
   "order": {
     "apporder": {
-      "app": "0x60c5AeB72709d5acA3DB68Be57Abc5B0e6DAaefb",
+      "app": "0xd5728B47b7182A4C0944921c77fE158E2885F503",
       "appprice": "0",
-      "volume": "1000",
-      "tag": "0x0000000000000000000000000000000000000000000000000000000000000003",
+      "volume": "1000000",
+      "tag": ["tee", "scone"],
       "datasetrestrict": "0x0000000000000000000000000000000000000000",
       "workerpoolrestrict": "0x0000000000000000000000000000000000000000",
       "requesterrestrict": "0x0000000000000000000000000000000000000000"
+    },
+    "requestorder": {
+      "app": "0xd5728B47b7182A4C0944921c77fE158E2885F503",
+      "appmaxprice": "0",
+      "dataset": "0x0000000000000000000000000000000000000000",
+      "datasetmaxprice": "0",
+      "workerpool": "0x0000000000000000000000000000000000000000",
+      "workerpoolmaxprice": "0",
+      "volume": "1",
+      "category": "0",
+      "trust": "0",
+      "tag": [
+        "tee",
+        "scone"
+      ],
+      "beneficiary": "0x9E2d2c2522a904EF07DC61F88D189833476D4A58",
+      "callback": "0x0000000000000000000000000000000000000000",
+      "params": {
+        "iexec_args": "",
+        "iexec_input_files": [],
+        "iexec_result_encryption": false
+      },
+      "requester": "0x9E2d2c2522a904EF07DC61F88D189833476D4A58"
     }
   }
 }

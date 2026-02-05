@@ -1,5 +1,32 @@
 [
   {
+    "app": "0xd5728B47b7182A4C0944921c77fE158E2885F503",
+    "dealid": "0x0dd14f591c95cc1b0a2fff55578d95c087f763cfb386b902bf20058e78e3a4e6",
+    "taskids": [
+      "0xe9b6826890e1d7878d0da00f415f389c283e0960c6d7d66fd949b3b09b3c5a56"
+    ],
+    "txHash": "0x9fd5f67d53a81be95fb98b144fd0f497df9d931d9a29494e09b1105091b29c7a",
+    "date": "2026-02-04T18:50:42.853Z"
+  },
+  {
+    "app": "0xd5728B47b7182A4C0944921c77fE158E2885F503",
+    "dealid": "0xddfabfaaf6587d76c3cb2f1c22334bb2b16f35e526257f0eb210fa4e41105593",
+    "taskids": [
+      "0x504d3610b46958ccfd6ccb0f7f8bcb323f85537a73508853704496ac4bd21ad4"
+    ],
+    "txHash": "0xe8904cfcf4b8806985dcba336f0f192466f396a79caa86d2c6858f86f35fa849",
+    "date": "2026-02-04T18:34:09.961Z"
+  },
+  {
+    "app": "0xd5728B47b7182A4C0944921c77fE158E2885F503",
+    "dealid": "0xf9a073b1efbf2cb8e71cb9219b5647a9e23e7637660ed2f0d4ff01ebe49908ec",
+    "taskids": [
+      "0x8d0dd32e35532a706b1fdda86165193700d07eaf6a760ae656634b5dd528e4dc"
+    ],
+    "txHash": "0xf3efe7ceba1735df1032be2b9da60363958e8b51e6d9c9c8d86df58f9df34329",
+    "date": "2026-02-04T18:19:06.707Z"
+  },
+  {
     "app": "0x60c5AeB72709d5acA3DB68Be57Abc5B0e6DAaefb",
     "dealid": "0x4a4a2719c1359c5fe5576306b8df2d1256155d2313825ea64276ccf798bf1a71",
     "taskids": [
