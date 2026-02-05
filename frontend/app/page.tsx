@@ -144,9 +144,12 @@ export default function Home() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-6xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">
+          <div className="flex items-center justify-center mb-4">
+          <img src="/logo.svg" alt="PrivaScore Logo" className="h-20 w-20 mr-4" />
+          <h1 className="text-6xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
             PrivaScore
           </h1>
+        </div>
           <p className="text-xl text-gray-600 mb-2">Privacy-Preserving Credit Scoring for DeFi</p>
           <p className="text-sm text-gray-500">Powered by iExec Trusted Execution Environment</p>
         </div>
