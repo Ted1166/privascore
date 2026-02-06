@@ -20,19 +20,17 @@ async function retryWithDelay<T>(
     }
   }
 
-// Get current gas prices from network
 async function getGasPrices(provider: any) {
   try {
     const feeData = await provider.getFeeData();
     
-    // Increase by 20% to ensure transaction goes through
     const maxFeePerGas = feeData.maxFeePerGas 
       ? (feeData.maxFeePerGas * 120n) / 100n 
-      : 40000000000n; // 40 Gwei fallback
+      : 40000000000n; 
     
     const maxPriorityFeePerGas = feeData.maxPriorityFeePerGas 
       ? (feeData.maxPriorityFeePerGas * 120n) / 100n 
-      : 2000000000n; // 2 Gwei fallback
+      : 2000000000n; 
     
     return {
       maxFeePerGas: maxFeePerGas.toString(),
@@ -41,15 +39,14 @@ async function getGasPrices(provider: any) {
   } catch (error) {
     console.log('Could not fetch gas prices, using safe defaults');
     return {
-      maxFeePerGas: '40000000000', // 40 Gwei
-      maxPriorityFeePerGas: '2000000000' // 2 Gwei
+      maxFeePerGas: '40000000000',
+      maxPriorityFeePerGas: '2000000000' 
     };
   }
 }
 
 export async function protectAndScore(file: File, walletProvider: any, onStatusUpdate?: (status: string) => void) {
   try {
-    // Initialize data protector
     const dataProtector = new IExecDataProtector(walletProvider);
     
     const fileBuffer = await file.arrayBuffer();
@@ -95,7 +92,7 @@ export async function protectAndScore(file: File, walletProvider: any, onStatusU
     const result = await dataProtector.core.processProtectedData({
       protectedData: protectedData.address,
       app: IAPP_ADDRESS,
-      maxPrice: 1000000000, // 1 RLC in nRLC
+      maxPrice: 1000000000, 
       workerpoolMaxPrice: 1000000000,
       onStatusUpdate: ({ title, isDone, payload }) => {
         console.log(`  ${title}: ${isDone ? '✅' : '⏳'}`, payload);
