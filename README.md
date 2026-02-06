@@ -4,8 +4,8 @@
 
 PrivaScore enables underbanked individuals to prove their creditworthiness without exposing their financial history. By processing sensitive data in Trusted Execution Environments (TEE), we unlock undercollateralized lending in DeFi while preserving user privacy.
 
-[![Demo Video](https://img.shields.io/badge/Demo-Watch%20Now-blue)](YOUR_VIDEO_LINK)
-[![Live Demo](https://img.shields.io/badge/Demo-Try%20It-green)](YOUR_DEMO_LINK)
+[![Demo Video](https://img.shields.io/badge/Demo-Watch%20Now-blue)](https://youtu.be/0m89f7kTCRg)
+[![Live Demo](https://img.shields.io/badge/Demo-Try%20It-green)](https://privascore.vercel.app/)
 
 ---
 
@@ -118,7 +118,7 @@ Financial Data (Private) → TEE Processing → Credit Score (Verifiable)
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/privascore.git
+git clone https://github.com/Ted1166/privascore.git
 cd privascore
 ```
 
@@ -131,7 +131,7 @@ npm install
 3. **Environment Configuration**
 ```bash
 # Create .env.local
-echo "NEXT_PUBLIC_IAPP_ADDRESS=0xf75a2cfC9baF52FeB068619f8f1A9e90cF8CC848" > .env.local
+echo "NEXT_PUBLIC_IAPP_ADDRESS=0xd5728B47b7182A4C0944921c77fE158E2885F503" > .env.local
 ```
 
 4. **Run Frontend**
@@ -238,24 +238,12 @@ raw_score = consistency + stability + debt_score
 final_score = 300 + (raw_score * 5.5)  # Scale to 300-850
 ```
 
-### Tier Classification
-
-| Score Range | Tier | Loan Eligibility |
-|-------------|------|------------------|
-| 750-850 | Excellent | Up to $10,000 |
-| 700-749 | Good | Up to $5,000 |
-| 650-699 | Fair | Up to $2,000 |
-| 600-649 | Poor | Up to $1,000 |
-| 300-599 | Very Poor | Limited |
-
----
-
 ## 🌍 Real-World Impact
 
 ### Target Markets
 
 **Emerging Markets:**
-- 📱 M-Pesa users in Kenya (30M+)
+- 📱 M-Pesa users in Kenya 
 - 💰 Mobile money in Nigeria, Ghana
 - 🏦 Underbanked in Southeast Asia
 
@@ -264,91 +252,7 @@ final_score = 300 + (raw_score * 5.5)  # Scale to 300-850
 - 💼 Freelancers with irregular income
 - 🎓 Young professionals without credit history
 
-### Market Size
-
-- **2B+ underbanked globally**
-- **$1T+ untapped credit market**
-- **400M+ mobile money users**
-
 ---
-
-## 🏆 Why PrivaScore Wins
-
-### ✅ Technical Innovation
-- Novel use of TEE for credit scoring
-- First privacy-preserving credit oracle for DeFi
-- Composable infrastructure (not just an app)
-
-### ✅ Real-World Problem
-- Addresses $1T+ market gap
-- Solves actual financial exclusion
-- Clear path to revenue (0.5% processing fee)
-
-### ✅ DeFi Integration
-- Enables undercollateralized lending
-- Portable credit scores across protocols
-- Verifiable without exposing data
-
-### ✅ Privacy-First
-- Perfect use case for confidential computing
-- Users control their data
-- Regulatory compliance (GDPR, CCPA)
-
----
-
-## 🛣️ Roadmap
-
-### Phase 1: MVP (Current) ✅
-- [x] TEE credit scoring
-- [x] CSV upload & processing
-- [x] Score visualization
-- [x] Arbitrum Sepolia deployment
-
-### Phase 2: Beta (Q2 2026)
-- [ ] API integrations (Plaid, M-Pesa)
-- [ ] Multi-chain support (Ethereum, Polygon)
-- [ ] Lending protocol partnerships
-- [ ] Mobile app (iOS/Android)
-
-### Phase 3: Production (Q3 2026)
-- [ ] Mainnet launch
-- [ ] Advanced ML models
-- [ ] Credit history builder
-- [ ] DeFi protocol SDK
-
-### Phase 4: Scale (Q4 2026)
-- [ ] Emerging market expansion
-- [ ] Institutional partnerships
-- [ ] Cross-border credit
-- [ ] Regulatory compliance
-
----
-
-## 🤝 For DeFi Protocols
-
-**Integrate PrivaScore as a Credit Oracle**
-
-```solidity
-// Simple integration example
-interface IPrivaScore {
-    function getCreditScore(address user) external view returns (uint256);
-    function getCreditTier(address user) external view returns (string memory);
-}
-
-contract UndercollateralizedLending {
-    IPrivaScore privaScore;
-    
-    function borrow(uint256 amount) external {
-        uint256 score = privaScore.getCreditScore(msg.sender);
-        require(score >= 650, "Insufficient credit score");
-        
-        uint256 maxBorrow = calculateMaxBorrow(score);
-        require(amount <= maxBorrow, "Exceeds credit limit");
-        
-        // Issue loan...
-    }
-}
-```
 
 **Benefits:**
 - Reduce default risk
@@ -392,7 +296,7 @@ npm run test:e2e
 
 **iApp Address (Arbitrum Sepolia):**
 ```
-0xf75a2cfC9baF52FeB068619f8f1A9e90cF8CC848
+0xd5728B47b7182A4C0944921c77fE158E2885F503
 ```
 
 **Score Storage Contract:**
@@ -402,13 +306,11 @@ Coming soon...
 
 ### Verify on Explorer
 
-[View on Arbiscan](https://sepolia.arbiscan.io/address/0xf75a2cfC9baF52FeB068619f8f1A9e90cF8CC848)
+[View on Arbiscan](https://sepolia.arbiscan.io/address/0xd5728B47b7182A4C0944921c77fE158E2885F503)
 
 ---
 
 ## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ### Development Setup
 
@@ -428,7 +330,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 👥 Team
 
-- **Your Name** - Founder & Developer - [@yourtwitter](https://twitter.com/yourtwitter)
+- **Ted Adams** - Software Developer - [@yourtwitter](https://twitter.com/yourtwitter)
 
 ---
 
@@ -442,32 +344,10 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 📞 Contact
 
-- **Website**: [privascore.io](https://privascore.io)
-- **Twitter**: [@PrivaScore](https://twitter.com/privascore)
-- **Email**: hello@privascore.io
-- **Discord**: [Join Community](https://discord.gg/privascore)
-
----
-
-## 🎥 Demo Video
-
-[![PrivaScore Demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
-
-**Key Highlights:**
-- 0:00 - Problem Overview
-- 0:30 - Solution Demo
-- 1:30 - TEE Processing
-- 2:30 - Credit Score Result
-- 3:00 - DeFi Integration
-
----
-
-## 📊 Project Statistics
-
-![GitHub stars](https://img.shields.io/github/stars/yourusername/privascore)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/privascore)
-![GitHub issues](https://img.shields.io/github/issues/yourusername/privascore)
-![License](https://img.shields.io/github/license/yourusername/privascore)
+- **Website**: [privascore]([https://privascore.io](https://privascore.vercel.app/))
+- **Twitter**: coming soon
+- **Email**: ogolated00@gmail.com
+- **Discord**: coming soon
 
 ---
 
@@ -476,7 +356,5 @@ MIT License - see [LICENSE](LICENSE) file for details.
 **Built with ❤️ for the Underbanked**
 
 *Making Credit Accessible, Privacy Preserved*
-
-[⭐ Star us on GitHub](https://github.com/yourusername/privascore) • [🐦 Follow on Twitter](https://twitter.com/privascore) • [💬 Join Discord](https://discord.gg/privascore)
 
 </div>
